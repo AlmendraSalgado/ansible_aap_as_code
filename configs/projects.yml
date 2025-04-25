@@ -9,6 +9,7 @@ controller_projects:
     scm_clean: true
     description: Ansible Configuration As Code
     organization: Default
+    scm_update_on_launch: true
     wait: true
     update_project: true
   - name: Ansible Openshift Virtualization
@@ -18,5 +19,6 @@ controller_projects:
     scm_clean: true
     description: Ansible Openshift Virtualization
     organization: Default
+    scm_update_on_launch: true
     wait: true
     update_project: true

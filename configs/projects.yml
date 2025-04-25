@@ -9,6 +9,8 @@ controller_projects:
     scm_clean: true
     description: Ansible Configuration As Code
     organization: Default
+    extra_vars:
+      aap_configs_dir: "{{ playbook_dir }}/configs"
     scm_update_on_launch: true
     wait: true
     update_project: true

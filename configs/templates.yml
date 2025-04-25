@@ -1,0 +1,33 @@
+---
+# Only Job name, type, project and playbook are required
+# Survey spec can be exported from existing job template querying the API.
+# Find the ID of the job template and use the following URL:
+# https://<controller_url>/api/v2/job_templates/<ID>/survey_spec/
+controller_templates:
+  - name: Create VMs
+    description: created by Ansible Playbook
+    job_type: run
+    inventory: localhost
+    credentials: OpenShift Credential
+    project: Ansible Openshift Virtualization
+    execution_environment: Day 2 EE
+    playbook: create_vms.yml
+    verbosity: 2
+  - name: Check VMs
+    description: created by Ansible Playbook
+    job_type: run
+    inventory: localhost
+    credentials: OpenShift Credential
+    project: Ansible Openshift Virtualization
+    execution_environment: Day 2 EE
+    playbook: check_vms.yml
+    verbosity: 2
+  - name: Update AAP CaC
+    description: created by Ansible Playbook
+    job_type: run
+    inventory: localhost
+    #credentials: OpenShift Credential
+    project: Ansible CaC
+    #execution_environment: Day 2 EE
+    playbook: configure_automation_controller.yml
+    verbosity: 2

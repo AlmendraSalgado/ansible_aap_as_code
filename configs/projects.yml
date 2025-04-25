@@ -1,0 +1,22 @@
+---
+controller_configuration_projects_async_retries: 60
+controller_configuration_projects_async_delay: 5
+controller_projects:
+  - name: Ansible CaC
+    scm_type: git
+    scm_url: https://github.com/AlmendraSalgado/ansible_aap_as_code.git
+    scm_branch: master
+    scm_clean: true
+    description: Ansible Configuration As Code
+    organization: Default
+    wait: true
+    update_project: true
+  - name: Ansible Openshift Virtualization
+    scm_type: git
+    scm_url: https://github.com/AlmendraSalgado/ansible_ocp_virt.git
+    scm_branch: master
+    scm_clean: true
+    description: Ansible Openshift Virtualization
+    organization: Default
+    wait: true
+    update_project: true

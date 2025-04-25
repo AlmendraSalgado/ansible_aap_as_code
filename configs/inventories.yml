@@ -1,0 +1,9 @@
+---
+# Commented out content is serving as example for you to add new content.
+controller_inventories:
+  - name: localhost
+    description: inventory for localhost
+    organization: Default
+  - name: OpenShift Virtual Machines
+    description: Load inventory from Openshift Virtualization
+    organization: Default

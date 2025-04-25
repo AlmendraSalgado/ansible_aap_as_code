@@ -1,0 +1,3 @@
+---
+- name: Include a play after another play
+  import_playbook: infra.aap_configuration.configure_aap.yml

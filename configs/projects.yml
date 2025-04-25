@@ -12,7 +12,7 @@ controller_projects:
     extra_vars:
       aap_configs_dir: "/runner/project/configs"
     scm_update_on_launch: true
-    verbosity: 1
+    verbosity: 0
     wait: true
     update_project: true
   - name: Ansible Openshift Virtualization
@@ -25,4 +25,4 @@ controller_projects:
     scm_update_on_launch: true
     wait: true
     update_project: true
-    verbosity: 1
+    verbosity: 0

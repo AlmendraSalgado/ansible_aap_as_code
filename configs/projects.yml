@@ -26,3 +26,14 @@ controller_projects:
     wait: true
     update_project: true
     verbosity: 0
+  - name: Ansible Linux
+    scm_type: git
+    scm_url: https://github.com/AlmendraSalgado/ansible_linux.git
+    scm_branch: main
+    scm_clean: true
+    description: Ansible Linux
+    organization: Default
+    scm_update_on_launch: true
+    wait: true
+    update_project: true
+    verbosity: 0

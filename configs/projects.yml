@@ -5,7 +5,7 @@ controller_projects:
   - name: Ansible CaC
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_aap_as_code.git
-    scm_branch: master
+    scm_branch: main
     scm_clean: true
     description: Ansible Configuration As Code
     organization: Default
@@ -14,7 +14,7 @@ controller_projects:
   - name: Ansible Openshift Virtualization
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_ocp_virt.git
-    scm_branch: master
+    scm_branch: main
     scm_clean: true
     description: Ansible Openshift Virtualization
     organization: Default

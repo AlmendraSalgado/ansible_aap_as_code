@@ -4,30 +4,25 @@
 # Find the ID of the job template and use the following URL:
 # https://<controller_url>/api/v2/job_templates/<ID>/survey_spec/
 controller_templates:
-  - name: Create VMs
+  - name: Manage VMs
     description: created by Ansible Playbook
     job_type: run
-    inventory: localhost
+    inventory: Demo Inventory
     credentials: OpenShift Credential
     project: Ansible Openshift Virtualization
     execution_environment: Day 2 EE
-    playbook: create_vms.yml
+    playbook: manage_resources.yml
     verbosity: 2
-  - name: Check VMs
-    description: created by Ansible Playbook
-    job_type: run
-    inventory: localhost
-    credentials: OpenShift Credential
-    project: Ansible Openshift Virtualization
-    execution_environment: Day 2 EE
-    playbook: check_vms.yml
-    verbosity: 2
+    webhook_service: github
+    webhook_credential: GitHub PAT
   - name: Update AAP CaC
     description: created by Ansible Playbook
     job_type: run
-    inventory: localhost
-    #credentials: OpenShift Credential
+    inventory: Demo Inventory
+    credentials: RH AAP
     project: Ansible CaC
     #execution_environment: Day 2 EE
     playbook: configure_automation_controller.yml
     verbosity: 2
+    webhook_service: github
+    webhook_credential: GitHub PAT

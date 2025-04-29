@@ -12,9 +12,9 @@ controller_templates:
     project: Ansible Openshift Virtualization
     execution_environment: Day 2 EE
     playbook: manage_resources.yml
-    verbosity: 2
-    webhook_service: github
-    webhook_credential: GitHub PAT
+    verbosity: 0
+    # webhook_service: github
+    # webhook_credential: GitHub PAT
   - name: Update AAP CaC
     description: created by Ansible Playbook
     job_type: run
@@ -23,6 +23,6 @@ controller_templates:
     project: Ansible CaC
     #execution_environment: Day 2 EE
     playbook: configure_automation_controller.yml
-    verbosity: 2
+    verbosity: 0
     webhook_service: github
     webhook_credential: GitHub PAT

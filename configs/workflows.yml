@@ -9,7 +9,7 @@ controller_workflows:
 
       - identifier: 101-sync-project
         unified_job_template:
-          name: Ansible CaC
+          name: Ansible Openshift Virtualization
           type: project
           organization:
             name: Default

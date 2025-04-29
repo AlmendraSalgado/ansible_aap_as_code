@@ -1,6 +1,6 @@
 ---
 controller_workflows:
-  - name: Simple workflow schema
+  - name: Update Openshift Virtual Machines
     state: present
     webhook_service: github
     webhook_credential: GitHub PAT
@@ -34,3 +34,4 @@ controller_workflows:
           inventory:
             organization:
               name: Default
+      

@@ -9,7 +9,7 @@ controller_inventory_sources:
     inventory: OpenShift Virtual Machines
     organization: Default
     credential: OpenShift Credential
-    # overwrite: true
+    overwrite: true
     update_on_launch: true
     update_cache_timeout: 0
     wait: true

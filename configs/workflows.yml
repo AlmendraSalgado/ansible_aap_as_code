@@ -1,37 +1,37 @@
----
-controller_workflows:
-  - name: Update Openshift Virtual Machines
-    state: present
-    webhook_service: github
-    webhook_credential: GitHub PAT
+# ---
+# controller_workflows:
+  # - name: Update Openshift Virtual Machines
+  #   state: present
+  #   webhook_service: github
+  #   webhook_credential: GitHub PAT
 
-    workflow_nodes:
+  #   workflow_nodes:
 
-      - identifier: 101-sync-project
-        unified_job_template:
-          name: Ansible Openshift Virtualization
-          type: project
-          organization:
-            name: Default
-        related:
-          success_nodes:
-            - identifier: 201-manage-vm
+  #     - identifier: 101-sync-project
+  #       unified_job_template:
+  #         name: Ansible Openshift Virtualization
+  #         type: project
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 201-manage-vm
 
-      - identifier: 201-manage-vm
-        unified_job_template:
-          name: Manage VMs
-          type: job_template
-          organization:
-            name: Default
-        related:
-          success_nodes:
-            - identifier: 301-sync-inventory
+  #     - identifier: 201-manage-vm
+  #       unified_job_template:
+  #         name: Manage VMs
+  #         type: job_template
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 301-sync-inventory
 
-      - identifier: 301-sync-inventory
-        unified_job_template:
-          name: OpenShift Virtual Machines Source
-          type: inventory_source
-          inventory:
-            organization:
-              name: Default
+  #     - identifier: 301-sync-inventory
+  #       unified_job_template:
+  #         name: OpenShift Virtual Machines Source
+  #         type: inventory_source
+  #         inventory:
+  #           organization:
+  #             name: Default
       

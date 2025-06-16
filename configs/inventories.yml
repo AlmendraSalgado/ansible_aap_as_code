@@ -7,3 +7,6 @@ controller_inventories:
   - name: OpenShift Virtual Machines
     description: Load inventory from Openshift Virtualization
     organization: Default
+  - name: Amazon Web Services
+    description: Load inventory from AWS 
+    organization: Default

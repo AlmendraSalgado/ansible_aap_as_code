@@ -2,13 +2,24 @@
 controller_configuration_inventory_source_update_async_retries: 60
 controller_configuration_inventory_source_update_async_delay: 2
 controller_inventory_sources:
-  - name: OpenShift Virtual Machines Source
-    source: openshift_virtualization
+  # - name: OpenShift Virtual Machines Source
+  #   source: openshift_virtualization
+  #   # source_project: Test Inventory source project
+  #   # source_path: phillips_hue/hosts
+  #   inventory: OpenShift Virtual Machines
+  #   organization: Default
+  #   credential: OpenShift Credential
+  #   overwrite: true
+  #   update_on_launch: true
+  #   update_cache_timeout: 0
+  #   wait: true
+  - name: Amazon EC2 Source
+    source: ec2
     # source_project: Test Inventory source project
     # source_path: phillips_hue/hosts
-    inventory: OpenShift Virtual Machines
+    inventory: Amazon Web Services
     organization: Default
-    credential: OpenShift Credential
+    credential: AWS Credential
     overwrite: true
     update_on_launch: true
     update_cache_timeout: 0

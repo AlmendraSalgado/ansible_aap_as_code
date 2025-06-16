@@ -1,3 +1,10 @@
 ---
+- name: Check project dir
+  hosts: localhost
+
+  tasks:
+    - name: Get dir
+      command: pwd
+
 - name: Configure AAP after fresh installation
   import_playbook: infra.aap_configuration.configure_aap.yml

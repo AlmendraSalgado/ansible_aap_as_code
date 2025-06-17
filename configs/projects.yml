@@ -2,13 +2,13 @@
 controller_configuration_projects_async_retries: 60
 controller_configuration_projects_async_delay: 5
 controller_projects:
-  - name: Ansible CaC
+  - name: Ansible Configuration As Code
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_aap_as_code.git
     scm_branch: main
     scm_clean: true
     description: Ansible Configuration As Code
-    organization: Default
+    organization: Admin
     extra_vars:
       aap_configs_dir: "/runner/project/configs"
     scm_update_on_launch: true

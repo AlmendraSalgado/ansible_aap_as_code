@@ -18,11 +18,11 @@ controller_templates:
   - name: Update AAP CaC
     description: created by Ansible Playbook
     job_type: run
-    inventory: Demo Inventory
+    inventory: localhost
     credentials: Ansible Automation Platform
-    project: Ansible CaC
+    project: Ansible Configuration As Code
     #execution_environment: Day 2 EE
     playbook: configure_automation_controller.yml
     verbosity: 0
     webhook_service: github
-    webhook_credential: GitHub PAT
+    # webhook_credential: GitHub PAT

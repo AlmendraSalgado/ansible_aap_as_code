@@ -15,7 +15,7 @@ controller_templates:
   #   verbosity: 0
     # webhook_service: github
     # webhook_credential: GitHub PAT
-  - name: Update AAP CaC
+  - name: AAP - Update Platform using CaC
     description: created by Ansible Playbook
     job_type: run
     inventory: localhost

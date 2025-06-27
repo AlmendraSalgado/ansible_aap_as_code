@@ -1,5 +1,38 @@
-# ---
-# controller_workflows:
+---
+controller_workflows:
+  - name: New RHEL Server RITM from ServiceNow
+    state: present
+
+    workflow_nodes:
+
+      - identifier: 101-manage-vm
+        unified_job_template:
+          name: AWS - Provision new VM
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 201-sync-inventory
+
+      - identifier: 201-sync-inventory
+        unified_job_template:
+          name: Amazon EC2 Source
+          type: inventory_source
+          inventory:
+            organization:
+              name: Default
+        related:
+          success_nodes:
+            - identifier: 301-create-ci
+
+      - identifier: 301-create-ci
+        unified_job_template:
+          name: SNOW - Create a Configuration Item (CI)
+          type: job_template
+          organization:
+            name: Default     
+            
   # - name: Update Openshift Virtual Machines
   #   state: present
   #   webhook_service: github

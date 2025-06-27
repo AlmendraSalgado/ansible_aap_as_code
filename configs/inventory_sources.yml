@@ -19,8 +19,15 @@ controller_inventory_sources:
     # source_path: phillips_hue/hosts
     inventory: Amazon Web Services
     organization: Default
-    credential: AWS Credential
+    credential: Amazon Web Services
     overwrite: true
     update_on_launch: true
     update_cache_timeout: 0
     wait: true
+    source_vars:
+      regions:
+        - us-east-2
+      exclude_filters:
+        - tag:Name:
+            - rosa-*
+            - bastion*

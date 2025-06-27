@@ -26,3 +26,32 @@ controller_templates:
     verbosity: 0
     webhook_service: github
     # webhook_credential: GitHub PAT
+  - name: AWS - Provision new VM
+    description: created by Ansible Playbook
+    job_type: run
+    inventory: localhost
+    credentials: Amazon Web Services
+    project: Ansible Cloud
+    #execution_environment: Day 2 EE
+    playbook: create_ec2_instance_with_rhel.yml
+    verbosity: 0
+    extra_vars:
+      aws_region: us-east-2
+      instance_type: t2.micro
+      key_name: ec2key
+      vpc_id: vpc-0f6b762d9e54f548c
+      vpc_subnet_id: subnet-08d04ff286a28eac1
+  - name: SNOW - Create a Configuration Item (CI)
+    description: created by Ansible Playbook
+    job_type: run
+    inventory: localhost
+    credentials: Amazon Web Services
+    project: Ansible Cloud
+    #execution_environment: Day 2 EE
+    playbook: create_ec2_instance_with_rhel.yml
+    verbosity: 0
+    extra_vars:
+      instance_name: '{{ "{{ tags.Name }}" }}'
+      ami_id: '{{ "{{ image_id }}" }}'
+      public_ip: '{{ "{{ public_ip_address }}" }}'
+      assigned_to: Ansible Automation Platform

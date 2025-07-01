@@ -1,0 +1,8 @@
+---
+aap_organizations:
+- name: Default
+  description: The default organization for Ansible Automation Platform
+  galaxy_credentials:
+    - certified
+    - validated
+    - Ansible Galaxy

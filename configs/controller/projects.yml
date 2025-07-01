@@ -2,15 +2,15 @@
 controller_configuration_projects_async_retries: 60
 controller_configuration_projects_async_delay: 5
 controller_projects:
+  - name: Demo Project
+    state: absent
   - name: Ansible Configuration As Code
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_aap_as_code.git
     scm_branch: main
     scm_clean: true
     description: Ansible Configuration As Code
-    organization: Admin
-    extra_vars:
-      aap_configs_dir: "/runner/project/configs"
+    organization: Default
     scm_update_on_launch: true
     verbosity: 0
     wait: true

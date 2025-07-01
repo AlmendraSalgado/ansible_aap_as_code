@@ -1,6 +1,7 @@
 ---
 controller_workflows:
   - name: New RHEL Server RITM from ServiceNow
+    ask_variables_on_launch: true
     state: present
 
     workflow_nodes:

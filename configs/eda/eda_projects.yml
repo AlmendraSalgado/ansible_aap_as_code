@@ -1,0 +1,10 @@
+---
+eda_projects:
+  - name: Ansible ServiceNow
+    description: created by Ansible
+    organization: Default
+    url: https://github.com/AlmendraSalgado/ansible_snow.git
+    sync: true
+    wait: true
+    timeout: 30
+    tls_validation: false

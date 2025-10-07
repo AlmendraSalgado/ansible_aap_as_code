@@ -1,39 +1,95 @@
 ---
-controller_workflows:
-  - name: New RHEL Server RITM from ServiceNow
-    ask_variables_on_launch: true
-    state: present
+# controller_workflows:
+  # - name: New RHEL Server RITM from ServiceNow
+  #   ask_variables_on_launch: true
+  #   state: present
 
-    workflow_nodes:
+  #   workflow_nodes:
 
-      - identifier: 101-manage-vm
-        unified_job_template:
-          name: AWS - Provision new VM
-          type: job_template
-          organization:
-            name: Default
-        related:
-          success_nodes:
-            - identifier: 201-sync-inventory
+  #     - identifier: 101-project-sync
+  #       unified_job_template:
+  #         name: Ansible ServiceNow
+  #         type: project
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 201-create-cr
 
-      - identifier: 201-sync-inventory
-        unified_job_template:
-          name: Amazon EC2 Source
-          type: inventory_source
-          inventory:
-            organization:
-              name: Default
-        related:
-          success_nodes:
-            - identifier: 301-create-ci
+  #     - identifier: 201-create-cr
+  #       unified_job_template:
+  #         name: SNOW - Create a Change Request (CR)
+  #         type: job_template
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 301-manage-vm
+  #           - identifier: 401-associate-cr-ritm
 
-      - identifier: 301-create-ci
-        unified_job_template:
-          name: SNOW - Create a Configuration Item (CI)
-          type: job_template
-          organization:
-            name: Default     
+  #     - identifier: 301-manage-vm
+  #       unified_job_template:
+  #         name: AWS - Provision new VM
+  #         type: job_template
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 501-inventory-sync
+
+  #     - identifier: 401-associate-cr-ritm
+  #       unified_job_template:
+  #         name: SNOW - Associate CR to RITM
+  #         type: job_template
+  #         organization:
+  #           name: Default
+
+  #     - identifier: 501-inventory-sync
+  #       unified_job_template:
+  #         name: Amazon EC2 Source
+  #         type: inventory_source
+  #         inventory:
+  #           organization:
+  #             name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 601-create-ci
+
+  #     - identifier: 601-create-ci
+  #       unified_job_template:
+  #         name: SNOW - Create a Configuration Item (CI)
+  #         type: job_template
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 701-associate-ci-cr
+  #           - identifier: 801-associate-ci-ritm
+
+  #     - identifier: 701-associate-ci-cr
+  #       unified_job_template:
+  #         name: SNOW - Associate CI to CR
+  #         type: job_template
+  #         organization:
+  #           name: Default
+  #       related:
+  #         success_nodes:
+  #           - identifier: 901-close-cr
+        
+  #     - identifier: 801-associate-ci-ritm
+  #       unified_job_template:
+  #         name: SNOW - Associate CI to RITM
+  #         type: job_template
+  #         organization:
+  #           name: Default
             
+  #     - identifier: 901-close-cr
+  #       unified_job_template:
+  #         name: SNOW - Close Change Request (CR)
+  #         type: job_template
+  #         organization:
+  #           name: Default 
+
   # - name: Update Openshift Virtual Machines
   #   state: present
   #   webhook_service: github

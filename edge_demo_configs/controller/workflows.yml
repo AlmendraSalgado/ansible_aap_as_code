@@ -1,0 +1,230 @@
+---
+controller_workflows:
+  - name: DCN Operating System Lifecycle Management - ONLY CREATE EC2 INSTANCE - PART 1
+    ask_variables_on_launch: true
+    extra_vars:
+      vpc_id: vpc-0848e742510025693
+      aws_region: us-east-2
+      vpc_subnet_id: subnet-0ab179c81842c3223
+      key_name: ec2key
+      instance_type: t2.xlarge
+      instance_name: vm1
+      image_builder_server_user_password: redhat123
+    state: present
+
+    workflow_nodes:
+
+      - identifier: 101-project-sync
+        unified_job_template:
+          name: Ansible Cloud
+          type: project
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 301-create-ec2
+
+      - identifier: 201-project-sync
+        unified_job_template:
+          name: Ansible Linux
+          type: project
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 501-subscribe-vms
+
+      - identifier: 301-create-ec2
+        unified_job_template:
+          name: Create EC2 Instance for Image Builder
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 401-inventory-sync
+
+      - identifier: 401-inventory-sync
+        unified_job_template:
+          name: EC2 Instances
+          type: inventory_source
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 501-subscribe-vms
+
+      - identifier: 501-subscribe-vms
+        unified_job_template:
+          name: Subscribe Instances to RHSM
+          type: job_template
+          inventory:
+            organization:
+              name: Default
+
+  - name: DCN Operating System Lifecycle Management - ONLY CREATE GCP INSTANCE - PART 1
+    ask_variables_on_launch: true
+    extra_vars:
+      gcp_project: openenv-6hnq4
+      gcp_source_image: projects/rhel-cloud/global/images/rhel-9-v20250709
+      gcp_zone: us-central1-a
+      gcp_region: us-central1
+      gcp_instance_name: test-ansible-instance
+      gcp_disk_name: test-ansible-disk
+      gcp_network_name: test-ansible-network
+      gcp_firewall_name: allow-ssh
+      gcp_address_name: test-ansible-address
+      gcp_ssh_pub_key: >-
+        ssh-rsa
+        AAAAB3NzaC1yc2EAAAADAQABAAABgQDApSd8PZnS4YiHSDyADl+6p0a/XHwGZCWy45zQrIX0mCCh9P0S0qkHtrEk48ggbCw9X6xLLnyl+RrnvSdyHiCLtV3p9NIuSkcN1d+hLUlLO7EUoa+DLO9B7esc7SdD86GDM3gKgHi9opdMt7Ou2v4C4n1w33uCOJwGxm7dZ9hC+VzJFTbhA1GNcMjIAyQYCPiO6Yz9hfa9Gt9jmanBoCLBpJctYcrkHnMWX0AUsNJMnIMEhh6PP8jTH05iwa+BaR5bgDRZiiaBPgMZBQlAjN7CewBwDhfTsVj0nOlmXhR6m/IdC/AE8jtcAeNtVli4TKGGxQevfWoVyqC7DElG3BYF4fOLywA3vVyWt/JAFhU7gmA8kpj1hbX4X+i9Ew15uRdd0+JBaZwDTMAheRV90ZJXutte9dnqE8hylY1dVQbjBO6wBQRYgBlSlupmNz4qicnCcxKUHwW2Nym24ICTvThJIotgaR9IX+YbogWv4snu2MFzZBxL1H7Ai2WBbh0FG/U=
+        asalgado
+    state: present
+
+    workflow_nodes:
+
+      - identifier: 101-project-sync
+        unified_job_template:
+          name: Ansible Cloud
+          type: project
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 201-create-gcp
+
+      - identifier: 201-create-gcp
+        unified_job_template:
+          name: Create GCP Instance for Image Builder
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 301-inventory-sync
+
+      - identifier: 301-inventory-sync
+        unified_job_template:
+          name: GCP instances
+          type: inventory_source
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 401-delete-gcp
+
+      - identifier: 401-delete-gcp
+        unified_job_template:
+          name: Delete GCP Instance
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 501-inventory-sync
+
+      - identifier: 501-inventory-sync
+        unified_job_template:
+          name: GCP instances
+          type: inventory_source
+          inventory:
+            organization:
+              name: Default
+
+  - name: DCN Operating System Lifecycle Management - ONLY IMAGE BUILDER - PART 2
+    ask_variables_on_launch: true
+    extra_vars:
+      image_builder_server_user_password: redhat123
+      builder_blueprint_name: minimal-rhel9
+      builder_blueprint_distro: rhel-9
+      builder_blueprint_description: minimal blueprint for ostree commit
+      builder_compose_type: edge-commit
+      builder_request_timeout: 2400
+      builder_wait_compose_timeout: 3600
+    state: present
+
+    workflow_nodes:
+
+      - identifier: 101-project-sync
+        unified_job_template:
+          name: Ansible Edge
+          type: project
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 201-install-ib
+
+      - identifier: 201-install-ib
+        unified_job_template:
+          name: Install Image Builder on EC2 Instance
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 301-create-blueprint
+
+      - identifier: 301-create-blueprint
+        unified_job_template:
+          name: Create and Push Blueprint to Image Builder
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 401-compose-image
+
+      - identifier: 401-compose-image
+        unified_job_template:
+          name: Compose New Image in Image Builder
+          type: job_template
+          organization:
+            name: Default
+
+  - name: DCN Operating System Lifecycle Management - ONLY DEPLOY RPM OSTREE - PART 3
+    ask_variables_on_launch: true
+    extra_vars:
+      image_name: minimal-rhel9
+      image_version: 1
+      openshift_namespace: image-management
+      registry_url: quay.io/asalgado
+    state: present
+
+    workflow_nodes:
+
+      - identifier: 101-project-sync
+        unified_job_template:
+          name: Ansible Edge
+          type: project
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 301-create-image-container
+
+      - identifier: 201-inventory-sync
+        unified_job_template:
+          name: EC2 Instances
+          type: inventory_source
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 301-create-image-container
+
+      - identifier: 301-create-image-container
+        unified_job_template:
+          name: Create Container for hosting RPM OSTree
+          type: job_template
+          organization:
+            name: Default
+        related:
+          success_nodes:
+            - identifier: 401-deploy-image-container
+
+      - identifier: 401-deploy-image-container
+        unified_job_template:
+          name: Deploy RPM OSTree hosted by Container
+          type: job_template
+          organization:
+            name: Default

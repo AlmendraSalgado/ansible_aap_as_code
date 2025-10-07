@@ -17,47 +17,103 @@ controller_templates:
   #   verbosity: 0
     # webhook_service: github
     # webhook_credential: GitHub PAT
-  # - name: AAP - Update Platform using CaC
-  #   description: created by Ansible Playbook
-  #   job_type: run
-  #   inventory: localhost
-  #   credentials: Ansible Automation Platform
-  #   project: Ansible Configuration As Code
-  #   #execution_environment: Day 2 EE
-  #   playbook: configure_automation_controller.yml
-  #   verbosity: 0
-  #   extra_vars:
-  #     aap_configs_dir: "/runner/project/configs"
-  #   webhook_service: github
-    # webhook_credential: GitHub PAT
-  - name: AWS - Provision new VM
+  - name: AAP - Update Platform using CaC
     description: created by Ansible Playbook
     job_type: run
     inventory: localhost
-    credentials: Amazon Web Services
-    project: Ansible Cloud
+    # credentials: Ansible Automation Platform
+    project: Ansible Configuration As Code
     #execution_environment: Day 2 EE
-    playbook: create_ec2_instance_with_rhel.yml
+    playbook: configure_automation_controller.yml
     verbosity: 0
     extra_vars:
-      aws_region: us-east-2
-      instance_type: t2.micro
-      key_name: ec2key
-      vpc_id: vpc-0099a69ac50037d0c
-      vpc_subnet_id: subnet-056d4f3439e235307
-  - name: SNOW - Create a Configuration Item (CI)
-    description: created by Ansible Playbook
-    job_type: run
-    inventory: Amazon Web Services
-    credentials: 
-      - Amazon Web Services
-      - ServiceNow
-    project: Ansible ServiceNow
-    #execution_environment: Day 2 EE
-    playbook: playbooks/create_configuration_item.yml
-    verbosity: 0
-    extra_vars:
-      instance_name:  !unsafe "{{ tags.Name }}"
-      ami_id:  !unsafe "{{ image_id }}"
-      public_ip: !unsafe "{{ public_ip_address }}"
-      assigned_to: Ansible Automation Platform
+      aap_configs_dir: "/runner/project/configs"
+    # webhook_service: github
+    # webhook_credential: GitHub PAT
+  # - name: AWS - Provision new VM
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: Amazon Web Services
+  #   project: Ansible Cloud
+  #   playbook: create_ec2_instance_with_rhel.yml
+  #   verbosity: 0
+  #   extra_vars:
+  #     aws_region: us-east-2
+  #     instance_type: t2.micro
+  #     key_name: ec2key
+  #     vpc_id: vpc-0e246f33c05b97eb0
+  #     vpc_subnet_id: subnet-0f6f2cc14ebb39aae
+  # - name: SNOW - Create a Configuration Item (CI)
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: Amazon Web Services
+  #   credentials: 
+  #     - Amazon Web Services
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/create_configuration_item.yml
+  #   verbosity: 0
+  #   extra_vars:
+  #     instance_name:  !unsafe "{{ tags.Name }}"
+  #     ami_id:  !unsafe "{{ image_id }}"
+  #     public_ip: !unsafe "{{ public_ip_address }}"
+  #     assigned_to: Ansible Automation Platform
+  # - name: SNOW - Create a Change Request (CR)
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: 
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/create_change_request.yml
+  #   verbosity: 0
+  #   extra_vars:
+  #     cr_type: standard
+  #     short_description: Provision new server in Amazon Web Services
+  #     description: !unsafe Please provision a new ec2 instance in AWS in region us-east-2 with type
+  #       t2.micro. Instance name is {{ instance_name }}
+  #     priority: moderate
+  #     risk: low
+  #     impact: low
+  # - name: SNOW - Close Change Request (CR)
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: 
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/close_change_request.yml
+  #   verbosity: 0
+  #   extra_vars:
+  #     close_code: successful
+  #     close_notes: !unsafe The {{ ci_number }} was created successfully and attached to the current
+  #       change request and to the requested item {{ request_item_number }}
+  #     assignment_group: Ansible Automation Platform
+  # - name: SNOW - Associate CR to RITM
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: 
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/associate_change_requestr_to_requested_item.yml
+  #   verbosity: 0
+  # - name: SNOW - Associate CI to CR
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: 
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/associate_configuration_item_to_change_request.yml
+  #   verbosity: 0
+  # - name: SNOW - Associate CI to RITM
+  #   description: created by Ansible Playbook
+  #   job_type: run
+  #   inventory: localhost
+  #   credentials: 
+  #     - ServiceNow
+  #   project: Ansible ServiceNow
+  #   playbook: playbooks/associate_configuration_item_to_requested_item.yml
+  #   verbosity: 0

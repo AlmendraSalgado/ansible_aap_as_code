@@ -5,9 +5,9 @@ controller_inventories:
   #   new_name: localhost
   #   description: inventory for localhost
   #   organization: Default
-  # - name: OpenShift Virtual Machines
-  #   description: Load inventory from Openshift Virtualization
-  #   organization: Default
-  - name: Amazon Web Services
+  - name: AWS Inventory
     description: Load inventory from AWS 
+    organization: Default
+  - name: GCP Inventory
+    description: Load inventory from GCP 
     organization: Default

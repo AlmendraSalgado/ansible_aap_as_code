@@ -1,0 +1,126 @@
+---
+# Only Job name, type, project and playbook are required
+# Survey spec can be exported from existing job template querying the API.
+# Find the ID of the job template and use the following URL:
+# https://<controller_url>/api/v2/job_templates/<ID>/survey_spec/
+controller_templates:
+  - name: Demo Job Template
+    state: absent
+  - name: Compose New Image in Image Builder
+    inventory: AWS Inventory
+    project: Ansible Edge
+    credentials: 
+      - AWS Credential
+      - EC2 Instances
+    playbook: compose_new_image.yaml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  - name: Create and Push Blueprint to Image Builder
+    inventory: AWS Inventory
+    project: Ansible Edge
+    credentials: 
+      - EC2 Instances
+    playbook: create_edge_image_blueprint.yaml
+    verbosity: 0
+    job_type: run
+    description: created by Ansible Playbook
+  - name: Create Container for hosting RPM OSTree
+    inventory: AWS Inventory
+    project: Ansible Edge
+    credentials: 
+      - Openshift Bearer Token
+      - EC2 Instances
+    playbook: create_image_container.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+    extra_vars:
+      rhsm_username:  !unsafe "{{ rhsm_username }}"
+      rhsm_password:  !unsafe "{{ rhsm_password }}"
+    become_enabled: true
+  - name: Create EC2 Instance for Image Builder
+    inventory: localhost
+    project: Ansible Cloud
+    credentials: 
+      - AWS Credential
+    playbook: create_ec2_instance_with_rhel.yml
+    verbosity: 0
+    job_type: run
+    description: created by Ansible Playbook
+  - name: Create GCP Instance for Image Builder
+    inventory: localhost
+    project: Ansible Cloud
+    credentials: 
+      - GCP Credential
+    playbook: create_gcp_instance_with_rhel.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  - name: Delete EC2 Instance
+    inventory: localhost
+    project: Ansible Cloud
+    credentials: 
+      - AWS Credential
+    playbook: delete_ec2_instance.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  - name: Delete GCP Instance
+    inventory: localhost
+    project: Ansible Cloud
+    credentials: 
+      - GCP Credential
+    playbook: delete_gcp_instance.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  - name: Deploy RPM OSTree hosted by Container
+    inventory: localhost
+    project: Ansible Edge
+    credentials: 
+      - Openshift Bearer Token
+    playbook: deploy_image_container.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  - name: Install Image Builder on EC2 Instance
+    inventory: AWS Inventory
+    project: Ansible Edge
+    credentials: 
+      - EC2 Instances
+    playbook: install_image_builder.yml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+  # - name: Install Image Builder on GCP Instance
+  #   inventory: GCP Inventory
+  #   project: Ansible Edge
+  #   credentials: 
+  #     - GCP Instances
+  #   playbook: install_image_builder.yml
+  #   job_type: run
+  #   description: created by Ansible Playbook
+  #   ask_variables_on_launch: true
+  #   verbosity: 0
+  - name: Subscribe Instances to RHSM
+    inventory: AWS Inventory
+    project: Ansible Linux
+    credentials: 
+      - EC2 Instances
+    playbook: subscribe_instances.yaml
+    job_type: run
+    description: created by Ansible Playbook
+    ask_variables_on_launch: true
+    verbosity: 0
+    become_enabled: true
+    extra_vars:
+      rhsm_username:  "{{ rhsm_username }}"
+      rhsm_password:  "{{ rhsm_password }}"

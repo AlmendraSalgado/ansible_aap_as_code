@@ -15,17 +15,17 @@ controller_projects:
     verbosity: 0
     wait: true
     update_project: true
-  - name: Ansible Openshift Virtualization
-    scm_type: git
-    scm_url: https://github.com/AlmendraSalgado/ansible_ocp_virt.git
-    scm_branch: main
-    scm_clean: true
-    description: Ansible Openshift Virtualization
-    organization: Default
-    scm_update_on_launch: true
-    wait: true
-    update_project: true
-    verbosity: 0
+  # - name: Ansible Openshift Virtualization
+  #   scm_type: git
+  #   scm_url: https://github.com/AlmendraSalgado/ansible_ocp_virt.git
+  #   scm_branch: main
+  #   scm_clean: true
+  #   description: Ansible Openshift Virtualization
+  #   organization: Default
+  #   scm_update_on_launch: true
+  #   wait: true
+  #   update_project: true
+  #   verbosity: 0
   - name: Ansible Linux
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_linux.git
@@ -37,17 +37,17 @@ controller_projects:
     wait: true
     update_project: true
     verbosity: 0
-  - name: Ansible ServiceNow
-    scm_type: git
-    scm_url: https://github.com/AlmendraSalgado/ansible_snow.git
-    scm_branch: main
-    scm_clean: true
-    description: Ansible ServiceNow
-    organization: Default
-    scm_update_on_launch: true
-    wait: true
-    update_project: true
-    verbosity: 0
+  # - name: Ansible ServiceNow
+  #   scm_type: git
+  #   scm_url: https://github.com/AlmendraSalgado/ansible_snow.git
+  #   scm_branch: main
+  #   scm_clean: true
+  #   description: Ansible ServiceNow
+  #   organization: Default
+  #   scm_update_on_launch: true
+  #   wait: true
+  #   update_project: true
+  #   verbosity: 0
   - name: Ansible Cloud
     scm_type: git
     scm_url: https://github.com/AlmendraSalgado/ansible_cloud.git

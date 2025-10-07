@@ -1,6 +1,6 @@
 ---
-eda_event_streams:
-  - name: ServiceNow
-    credential_name: ServiceNow
-    organization: Default
-    forward_events: true
+# eda_event_streams:
+#   - name: ServiceNow
+#     credential_name: ServiceNow
+#     organization: Default
+#     forward_events: true
